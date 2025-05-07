@@ -9,6 +9,24 @@
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
   </head>
+
+  <style> 
+  html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+.unity-mobile, #unityContainer, canvas {
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+</style>
   <body>
     <div id="unity-container" class="unity-desktop">
       <canvas id="unity-canvas" width=960 height=600 tabindex="-1"></canvas>
@@ -117,6 +135,18 @@
             };
 
       document.body.appendChild(script);
+      function resizeCanvas() {
+  if (canvas) {
+    canvas.style.width = window.innerWidth + "px";
+    canvas.style.height = window.innerHeight + "px";
+  }
+}
+
+window.addEventListener("resize", resizeCanvas);
+window.addEventListener("orientationchange", function() {
+  setTimeout(resizeCanvas, 300); // delay to let rotation settle
+});
+
 
     </script>
   </body>
